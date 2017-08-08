@@ -1,11 +1,11 @@
 import { createStore } from 'redux';
 import rootReducer from '../reducers/root_reducer';
 
-const def = Object.freeze({
+const defaultState = Object.freeze({
   todos: []
 });
 
-const configureStore = (preloadedState=def) => (
+const configureStore = (preloadedState=defaultState) => (
   createStore(
     rootReducer,
     preloadedState

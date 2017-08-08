@@ -23,21 +23,32 @@ class TodoItem extends React.Component {
 }
 
 class Main extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      newTodoText: ''
+    };
+    this.addNewTodo = this.addNewTodo.bind(this);
+  }
+  
+  addNewTodo() {
+    const {newTodoText} = this.state;
+    if (newTodoText && newTodoText !== "") {
+      this.props.addTodo(this.state.newTodoText);
+      this.setState({
+        newTodoText: ""
+      });
+    }
+  }
+  
   render() {
-    const temporaryTodos = [
-      {
-        id: "13984719283741234",
-        text: "Hello!"
-      },
-      {
-        id: "193847917234123asdfas84",
-        text: "Hello again!"
-      },
-    ];
+    const { todos } = this.props;
     const renderTodos = () => {
-      return temporaryTodos.map((todo) => {
+      return todos.map((todo) => {
         return (
-          <TodoItem text={todo.text} key={todo.id} id={todo.id}/>
+          <TouchableOpacity>
+            <TodoItem text={todo.text} key={todo.id} id={todo.id}/>
+          </TouchableOpacity>
         );
       });
     };
@@ -50,7 +61,17 @@ class Main extends React.Component {
           </Text>
         </View>
         <View style={styles.inputContainer}>
-          <TextInput style={styles.input}/>
+          <TextInput
+            onChange={(e) => {
+              this.setState({
+                newTodoText: e.nativeEvent.text
+              });
+            }}
+            value={this.state.newTodoText}
+            returnKeyType="done"
+            placeholder="New Todo"
+            onSubmitEditing={this.addNewTodo}
+            style={styles.input}/>
         </View>
         <ScrollView
           automaticallyAdjustContentInsets={false}>

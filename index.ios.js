@@ -10,13 +10,13 @@ import { AppRegistry, View, Text } from 'react-native';
 import configureStore from './app/store/store';
 
 
-import Main from './app/components/main.js';
+import MainContainer from './app/components/main_container';
 
 class reactTest extends React.Component {
   render() {
     return (
       <Provider store={configureStore()}>
-        <Main/>
+        <MainContainer/>
       </Provider>
     );
   }
