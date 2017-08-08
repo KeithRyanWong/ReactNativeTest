@@ -8,19 +8,7 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native';
-
-
-class TodoItem extends React.Component {
-  render() {
-    return (
-      <View style={styles.todoContainer}>
-        <Text style={styles.todoText}>
-          {this.props.text}
-        </Text>
-      </View>
-    );
-  }
-}
+import TodoItemContainer from './todo_item_container';
 
 class Main extends React.Component {
   constructor(props) {
@@ -46,9 +34,7 @@ class Main extends React.Component {
     const renderTodos = () => {
       return todos.map((todo) => {
         return (
-          <TouchableOpacity>
-            <TodoItem text={todo.text} key={todo.id} id={todo.id}/>
-          </TouchableOpacity>
+          <TodoItemContainer text={todo.text} key={todo.id} id={todo.id}/>
         );
       });
     };
