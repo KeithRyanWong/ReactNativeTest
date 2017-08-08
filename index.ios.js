@@ -4,32 +4,24 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { AppRegistry, View, Text } from 'react-native';
+import configureStore from './app/store/store';
+
+
 import Main from './app/components/main.js';
 
-export default class reactTest extends Component {
+class reactTest extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Hello</Text>
-        <Main />
-      </View>
+      <Provider store={configureStore()}>
+        <Main/>
+      </Provider>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
-
 AppRegistry.registerComponent('reactTest', () => reactTest);
+
+export default reactTest;
